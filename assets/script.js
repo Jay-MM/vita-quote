@@ -37,17 +37,37 @@ function searchPokémon(e) {
     .then(function (pokemon) {
       // Increment the counter for the selected Pokemon
       selectedPokemons[pokémonName] = (selectedPokemons[pokémonName] || 0) + 1;
+
       // console.log(pokemon)
+
       // create elmnts
+      let cardDiv = document.createElement('div')
+      let cardBody = document.createElement('div')
+
       let h2 = document.createElement('h2')
       let img = document.createElement('img')
+      let abilitiesList = document.createElement('ul')
+
       // modify elmnts
+      cardDiv.classList.add('card', 'mb-3','col-md-3')
+      cardBody.classList.add('card-body')
+      
       h2.textContent = pokemon.name
       img.src = pokemon.sprites.front_default
       img.alt = pokemon.name
+      img.classList.add('card-img-top')
+
+      for (let i = 0; i < pokemon.abilities.length; i++) {
+        var li = document.createElement('li')
+        li.textContent = pokemon.abilities[i].ability.name
+        abilitiesList.append(li)
+      }
       // append to DOM
-      pokéResult.append(h2)
-      pokéResult.append(img)
+      cardBody.append(h2)
+      cardBody.append(img)
+      cardBody.append(abilitiesList)
+      cardDiv.append(cardBody)
+      pokéResult.append(cardDiv)
 
       pokéInput.value = ''
 
