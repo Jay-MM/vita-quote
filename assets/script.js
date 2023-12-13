@@ -6,11 +6,11 @@ const kanyeSays = document.getElementById('kanye-quote');
 
 function searchPokémon(e) {
   e.preventDefault()
-  console.log('Searching Pokémon Database...')
+  console.log('Initializing Pokémon Database...')
   // get value of input 
   console.log('Searching Pokémon DB for "' + pokéInput.value + '"')
 
-  const pokémonName = pokéInput.value
+  const pokémonName = pokéInput.value.trim().toLowerCase()
 
   // fetch req to PokeAPI
   fetch('https://pokeapi.co/api/v2/pokemon/'+ pokémonName)
@@ -20,7 +20,9 @@ function searchPokémon(e) {
       console.log('found "' + pokémonName + '" in DB')
       return response.json()
       } else if (response.status === 404) {
-        return console.error()
+        console.log('"'+ pokémonName + '" Not found')
+        alert('"' + pokémonName + '" not found. Try Searching again')
+        pokéInput.value = ''
       }
     })
     .then(function (pokemon) {
@@ -35,7 +37,9 @@ function searchPokémon(e) {
       // append to DOM
       pokéResult.append(h2)
       pokéResult.append(img)
-      
+
+      pokéInput.value = ''
+
     })
 }
 
