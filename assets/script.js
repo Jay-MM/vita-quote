@@ -4,6 +4,8 @@ const pokéResult = document.getElementById('pokéResult');
 const foxImg = document.getElementById('fox-img');
 const kanyeSays = document.getElementById('kanye-quote');
 
+const selectedPokemons = {};
+
 function searchPokémon(e) {
   e.preventDefault()
   console.log('Initializing Pokémon Database...')
@@ -11,6 +13,13 @@ function searchPokémon(e) {
   console.log('Searching Pokémon DB for "' + pokéInput.value + '"')
 
   const pokémonName = pokéInput.value.trim().toLowerCase()
+
+  // Check if the Pokemon has been selected once
+  if (selectedPokemons[pokémonName] && selectedPokemons[pokémonName] >= 1) {
+    alert('You can only select ' + pokémonName + ' once. Try searching for another.');
+    pokéInput.value = ''
+    return;
+  }
 
   // fetch req to PokeAPI
   fetch('https://pokeapi.co/api/v2/pokemon/'+ pokémonName)
@@ -26,6 +35,8 @@ function searchPokémon(e) {
       }
     })
     .then(function (pokemon) {
+      // Increment the counter for the selected Pokemon
+      selectedPokemons[pokémonName] = (selectedPokemons[pokémonName] || 0) + 1;
       // console.log(pokemon)
       // create elmnts
       let h2 = document.createElement('h2')
