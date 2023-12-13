@@ -97,12 +97,29 @@ fetch('https://randomfox.ca/floof/')
   }
 })
 .then(function(foxImage) {
+  let capDiv = document.createElement('div')
+  let foxLink = document.createElement('a')
+  let figure = document.createElement('figure')
   let img = document.createElement('img')
+  let figCaption = document.createElement('figcaption')
+
+  figCaption.textContent = 'Co-created by xinitrc'
+  foxLink.href = 'https://randomfox.ca/'
+  foxLink.target = '_blank'
+  foxLink.textContent = 'click here  to see original site of fox images'
+
+  capDiv.classList.add('d-flex', 'justify-content-between')
+
   img.src = foxImage.image
   img.alt = 'random fox image'
   img.classList.add('w-100')
 
-  foxImg.append(img)
+  capDiv.append(figCaption)
+  capDiv.append(foxLink)
+  
+  figure.append(img)
+  figure.append(capDiv)
+  foxImg.append(figure)
   
 })
 
