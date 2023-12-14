@@ -1,3 +1,23 @@
+// fetch('test.txt')
+// .then(function(response){ return response.text()})
+// .then((text)=> console.log(text))
+
+// let docBody = document.body
+
+
+// fetch('assets/pokemon-logo.png')
+// .then(response => response.blob())
+// .then(function(blob){
+//   let img = document.createElement('img');
+//   const objectURL = URL.createObjectURL(blob);
+  
+//   img.classList.add('object-fit-sm-contain', 'border', 'rounded', 'w-25')
+//   img.src = objectURL;
+  
+//   docBody.insertBefore(img, docBody.firstChild);
+// })
+
+
 const pokéForm = document.querySelector('form');
 const pokéInput = document.getElementById('pokéName');
 const pokéResult = document.getElementById('pokéResult');
@@ -8,7 +28,7 @@ const selectedPokemons = {};
 
 function searchPokémon(e) {
   e.preventDefault()
-  console.log('Initializing Pokémon Database...')
+  console.log('Initializing Pokémon textbase...')
   // get value of input 
   console.log('Searching Pokémon DB for "' + pokéInput.value + '"')
 
